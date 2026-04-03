@@ -13,8 +13,8 @@ Read [`ac108_shutdown_crash_analysis.md`](ac108_shutdown_crash_analysis.md) befo
 | Phase | Name | Status | Goal |
 |---|---|---|---|
 | 1 | Instrumentation | **done** | Hypothesis confirmed with runtime evidence. See `analysis/executions/2026-04-03_22-18-50_dmesg.txt`. |
-| 2 | Fix | **current** | F1–F4 written (all in `seeed-voicecard.c`). Deployed to Pi for testing. F5 (error handling) and F6 (ac101 spinlock) deferred to post-validation. |
-| 3 | Validate | pending | Sustained testing on the Pi: multiple wake-capture-STT-shutdown cycles without reboot. Remove Python workarounds in raspberry-ai (`paComplete` flag, cancel monkey-patch, cleanup monkey-patch, `os._exit(0)`) once driver shutdown is confirmed clean. |
+| 2 | Fix | **done** | F1–F4 written and validated. Single-cycle test clean: zero BUG, no Oops, no panic. See [`analysis/executions/2026-04-03_22-58-41_report.md`](executions/2026-04-03_22-58-41_report.md). F5 (error handling) deferred. F6 (ac101 spinlock) confirmed moot after F4. |
+| 3 | Validate | **current** | Sustained testing on the Pi: multiple wake-capture-STT-shutdown cycles without reboot. Remove Python workarounds in raspberry-ai (`paComplete` flag, cancel monkey-patch, cleanup monkey-patch, `os._exit(0)`) once driver shutdown is confirmed clean. |
 | 4 | PR | pending | Produce a clean branch from `upstream/v6.12` with fix commits only (no `analysis/`, no instrumentation). Write PR description drawing from the analysis document. Submit to `HinTak/seeed-voicecard`. |
 
 ## Work items
@@ -35,17 +35,17 @@ Read [`ac108_shutdown_crash_analysis.md`](ac108_shutdown_crash_analysis.md) befo
 | F2 | Fix 2: `cancel_work_sync` in `seeed_voice_card_shutdown` | 2 | done | F1 |
 | F3 | Fix 3: move `cancel_work_sync` from TRIGGER_START to `startup` callback | 2 | done | — |
 | F4 | Fix 4: move `_set_clock(1,...)` from TRIGGER_START to new `prepare` callback | 2 | done | — |
-| F1-F4-test | Test F1–F4: deploy to Pi, reproduce scenario, confirm no BUG/crash | 2 | **next** | F1–F4 |
+| F1-F4-test | Test F1–F4: deploy to Pi, reproduce scenario, confirm no BUG/crash | 2 | done | F1–F4 |
 | F5 | Fix 5: error handling in `ac108_multi_write` (`ac108.c`) | 2 | pending | — |
 | F6 | Fix 6: fix `ac101_trigger(START)` I2C under spinlock (`ac101.c:1271–1282`) | 2 | pending | — |
-| V1 | Sustained Pi testing: 5+ wake-capture-STT-shutdown cycles without crash | 3 | pending | F1-F4-test |
+| V1 | Sustained Pi testing: 5+ wake-capture-STT-shutdown cycles without crash | 3 | done | F1-F4-test |
 | V2 | Remove Python workarounds in raspberry-ai (paComplete flag, monkey-patches, `os._exit`) | 3 | pending | V1 |
 | V3 | Re-test after Python workaround removal | 3 | pending | V2 |
 | PR1 | Create clean branch from `upstream/v6.12`, cherry-pick fix commits only | 4 | pending | V1 |
 | PR2 | Write PR description from analysis document | 4 | pending | PR1 |
 | PR3 | Submit PR to `HinTak/seeed-voicecard` | 4 | pending | PR2 |
 
-**Next item to pick up:** F1-F4-test — deploy the fixed module to the Pi, run the wake-capture-STT-shutdown cycle, capture dmesg. Expect: `PREPARE ... irqs_disabled=0 in_atomic=0`, `TRIG_START`/`TRIG_STOP` with no `BUG:` following, `work_cb_codec_clk` ENTER/EXIT from the deferred stop, clean shutdown, no panic.
+**Next item to pick up:** V2 — remove Python workarounds in `raspberry-ai` (paComplete flag, cancel monkey-patch, cleanup monkey-patch, `os._exit(0)`). V1 passed: 6 clean single-cycle runs across separate invocations, same driver instance, zero BUG traces. See [`analysis/executions/AGENTS.md`](executions/AGENTS.md) for full V1 status.
 
 ### Summary of F1–F4 changes (all in `seeed-voicecard.c`)
 
@@ -92,4 +92,6 @@ Checklist tracking readiness for upstream submission:
 | First crash report | [`analysis/executions/2026-04-03_22-18-50_report.md`](executions/2026-04-03_22-18-50_report.md) | Detailed analysis: timeline, BUG traces, uncertainty resolutions, fix priority revision |
 | First crash dmesg | [`analysis/executions/2026-04-03_22-18-50_dmesg.txt`](executions/2026-04-03_22-18-50_dmesg.txt) | Raw dmesg: 3× BUG scheduling while atomic → kernel Oops → panic |
 | First crash app log | [`analysis/executions/2026-04-03_22-18-50_master_py.txt`](executions/2026-04-03_22-18-50_master_py.txt) | Python-side log showing full wake-capture-STT cycle before crash |
+| F1–F4 validation report | [`analysis/executions/2026-04-03_22-58-41_report.md`](executions/2026-04-03_22-58-41_report.md) | Clean pass: zero BUG, no Oops, all four fixes confirmed working |
+| F1–F4 validation dmesg | [`analysis/executions/2026-04-03_22-58-41_dmesg.txt`](executions/2026-04-03_22-58-41_dmesg.txt) | Clean dmesg: prepare in process ctx, workqueue deferral, clean shutdown |
 | Executions index | [`analysis/executions/AGENTS.md`](executions/AGENTS.md) | Summary and routing for all execution captures |

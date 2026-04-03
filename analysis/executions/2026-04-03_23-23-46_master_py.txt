@@ -1,0 +1,204 @@
+(venv) user@morpheus:~/raspberry-ai/mvp-modules/forked_assistant/src $ LOG_LEVEL=PERF python master.py
+2026-04-03 23:23:24.927901841 [W:onnxruntime:Default, device_discovery.cc:164 DiscoverDevicesForPlatform] GPU device discovery failed: device_discovery.cc:89 ReadFileContents Failed to open file: "/sys/class/drm/card1/device/vendor"
+2026-04-03 23:23:27.748 | INFO     | pipecat:<module>:14 - ᓚᘏᗢ Pipecat 0.0.108 (Python 3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]) ᓚᘏᗢ
+23:23:30.552 INFO  master: [master] recorder child spawned (pid=1420)
+23:23:30.559 INFO  recorder_child: [child] SCHED_FIFO priority 50
+23:23:30.561 DEBUG asyncio: Using selector: EpollSelector
+23:23:30.563 DEBUG ring_buffer: header initialized: sr=16000 ch=1 sw=2 frame=640 bytes
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.front
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround21
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround21
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround40
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround41
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround50
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround51
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround71
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.iec958
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.iec958
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.iec958
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.hdmi.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM hdmi
+ALSA lib confmisc.c:1377:(snd_func_refer) Unable to find definition 'cards.0.pcm.hdmi.0:CARD=0,AES0=4,AES1=130,AES2=0,AES3=2'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM hdmi
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+ALSA lib pcm_oss.c:404:(_snd_pcm_oss_open) Cannot open device /dev/dsp
+ALSA lib pcm_oss.c:404:(_snd_pcm_oss_open) Cannot open device /dev/dsp
+ALSA lib pulse.c:242:(pulse_connect) PulseAudio: Unable to connect: Connection refused
+
+ALSA lib pulse.c:242:(pulse_connect) PulseAudio: Unable to connect: Connection refused
+
+ALSA lib pcm_a52.c:1036:(_snd_pcm_a52_open) a52 is only for playback
+ALSA lib conf.c:5695:(snd_config_expand) Unknown parameters {AES0 0x6 AES1 0x82 AES2 0x0 AES3 0x2 CARD 0}
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM iec958:{AES0 0x6 AES1 0x82 AES2 0x0 AES3 0x2 CARD 0}
+ALSA lib confmisc.c:160:(snd_config_get_card) Invalid field card
+ALSA lib pcm_usb_stream.c:481:(_snd_pcm_usb_stream_open) Invalid card 'card'
+ALSA lib confmisc.c:160:(snd_config_get_card) Invalid field card
+ALSA lib pcm_usb_stream.c:481:(_snd_pcm_usb_stream_open) Invalid card 'card'
+ALSA lib confmisc.c:165:(snd_config_get_card) Cannot get card index for ALSA
+ALSA lib confmisc.c:165:(snd_config_get_card) Cannot get card index for ALSA
+ALSA lib confmisc.c:165:(snd_config_get_card) Cannot get card index for ALSA
+Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel
+jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+2026-04-03 23:23:30.734 | DEBUG    | pipecat.audio.vad.silero:__init__:147 - Loading Silero VAD model...
+2026-04-03 23:23:31.018 | DEBUG    | pipecat.audio.vad.silero:__init__:169 - Loaded Silero VAD
+23:23:31.019 INFO  recorder_child: loading openwakeword models...
+/home/user/pipecat-agent/venv/lib/python3.13/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py:123: UserWarning: Specified provider 'CUDAExecutionProvider' is not in available provider names.Available providers: 'AzureExecutionProvider, CPUExecutionProvider'
+  warnings.warn(
+23:23:32.844 INFO  recorder_child: openwakeword ready
+2026-04-03 23:23:32.846 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking Pipeline#0::Source -> LocalAudioInputTransport#0
+2026-04-03 23:23:32.846 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking LocalAudioInputTransport#0 -> DutyCycleEntry#0
+2026-04-03 23:23:32.846 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking DutyCycleEntry#0 -> GatedVADProcessor#0
+2026-04-03 23:23:32.846 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking GatedVADProcessor#0 -> OpenWakeWordProcessor#0
+2026-04-03 23:23:32.846 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking OpenWakeWordProcessor#0 -> AudioFrameWriter#0
+2026-04-03 23:23:32.846 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking AudioFrameWriter#0 -> DutyCycleExit#0
+2026-04-03 23:23:32.846 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking DutyCycleExit#0 -> Pipeline#0::Sink
+2026-04-03 23:23:32.849 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking PipelineTask#0::Source -> RTVIProcessor#0
+2026-04-03 23:23:32.849 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking RTVIProcessor#0 -> Pipeline#0
+2026-04-03 23:23:32.849 | DEBUG    | pipecat.processors.frame_processor:link:589 - Linking Pipeline#0 -> PipelineTask#0::Sink
+23:23:32.850 INFO  recorder_child: [child] queue depth monitor ENABLED (alarm threshold=2)
+23:23:32.850 INFO  master: [master] recorder child READY
+23:23:32.850 INFO  recorder_child: [child] duty cycle probe ENABLED (window=100 frames, budget=20ms)
+23:23:32.850 INFO  master: listening for wake word...
+2026-04-03 23:23:32.851 | DEBUG    | pipecat.pipeline.runner:run:71 - Runner PipelineRunner#0 started running PipelineTask#0
+23:23:32.853 DEBUG recorder_state: [state] OWW full reset
+23:23:32.853 WARNING recorder_state: [stream] start skipped — no truthy _in_stream
+23:23:32.853 DEBUG master: [master] state -> wake_listen
+2026-04-03 23:23:32.854 | DEBUG    | pipecat.pipeline.task:_wait_for_pipeline_start:745 - PipelineTask#0: Starting. Waiting for StartFrame#0 to reach the end of the pipeline...
+2026-04-03 23:23:32.867 | DEBUG    | pipecat.audio.vad.vad_analyzer:set_params:156 - Setting VAD params to: confidence=0.7 start_secs=0.2 stop_secs=1.8 min_volume=0.6
+2026-04-03 23:23:32.869 | DEBUG    | pipecat.pipeline.task:_wait_for_pipeline_start:748 - PipelineTask#0: StartFrame#0 reached the end of the pipeline, pipeline is now ready.
+23:23:32.886 DEBUG recorder_child: [DUTY] first audio frame: 640 bytes, 320 samples, sr=16000 Hz, ch=1, duration=20.0ms
+23:23:34.887 PERF  recorder_child: [DUTY/100] wake_listen: mean=1.5ms p95=1.5ms max=23.1ms util=8%  arrival: mean=20.0ms σ=19.5ms  q_max=0
+23:23:34.910 PERF  recorder_child: [OWW/25] predict: n=25 mean=21.9ms p95=22.8ms max=23.5ms
+23:23:35.150 INFO  recorder_child: WAKE DETECTED -- 'hey_jarvis'  |  score: 0.526
+23:23:35.151 INFO  master: [master] WAKE_DETECTED  score=0.526  keyword=hey_jarvis
+23:23:35.161 DEBUG recorder_state: [state] Silero LSTM reset
+23:23:35.161 DEBUG master: [master] state -> capture
+23:23:35.167 DEBUG recorder_child: [ring/write] phase wake_listen→capture: wrote 113 frames, write_pos=72320
+23:23:36.414 INFO  recorder_child: [VAD] speech_started (after 64 frames)
+23:23:36.415 INFO  master: [master] VAD_STARTED    write_pos=113280
+23:23:36.886 PERF  recorder_child: [DUTY/200] wake_listen->capture: mean=2.2ms p95=5.4ms max=5.5ms util=11%  arrival: mean=20.0ms σ=19.9ms  q_max=0
+23:23:38.490 INFO  recorder_child: [VAD] speech_stopped (after 167 frames)
+23:23:38.490 INFO  master: [master] VAD_STOPPED    write_pos=179200
+23:23:38.491 DEBUG master: [ring] span: start=72320(wake)  end=179200  bytes=106880  dur=3.34s
+23:23:38.491 DEBUG master: [ring] vad_start=113280  vad_gap=40960b (1.28s pre-speech dropped previously)
+23:23:38.491 DEBUG master: [ring] live write_pos=179200  stale=False
+23:23:38.491 DEBUG ring_buffer: read 106880 bytes [72320:179200]
+23:23:38.505 DEBUG master: [ring] read ok: 106880 bytes  53440 samples  zeros=0  rms=617.5
+23:23:38.506 INFO  master: captured 3.3s of audio
+23:23:38.508 INFO  master: sending audio to Deepgram Nova-3...
+23:23:38.527 DEBUG recorder_child: [ring/write] phase capture→idle: wrote 168 frames, write_pos=179840
+23:23:38.793 DEBUG httpcore.connection: connect_tcp.started host='api.deepgram.com' port=443 local_address=None timeout=60 socket_options=None
+23:23:38.888 PERF  recorder_child: [DUTY/300] capture->idle: mean=2.3ms p95=5.5ms max=5.8ms util=11%  arrival: mean=20.0ms σ=19.9ms  q_max=0
+23:23:39.056 DEBUG httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f8295cad0>
+23:23:39.056 DEBUG httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f82c67d10> server_hostname='api.deepgram.com' timeout=60
+23:23:39.287 DEBUG httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f82a0dbd0>
+23:23:39.288 DEBUG httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+23:23:39.289 DEBUG httpcore.http11: send_request_headers.complete
+23:23:39.290 DEBUG httpcore.http11: send_request_body.started request=<Request [b'POST']>
+23:23:39.718 DEBUG httpcore.http11: send_request_body.complete
+23:23:39.718 DEBUG httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+23:23:40.255 DEBUG httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'content-type', b'application/json'), (b'dg-project-id', b'256cf391-f5f3-479b-87ad-6df8ec5bc6c9'), (b'vary', b'origin, access-control-request-method, access-control-request-headers'), (b'vary', b'accept-encoding'), (b'access-control-allow-credentials', b'true'), (b'access-control-expose-headers', b'dg-model-name,dg-model-uuid,dg-additional-model-uuids,dg-char-count,dg-request-id,dg-project-id,dg-error,dg-breaks-applied,dg-pronunciations-applied,dg-pronunciation-warnings'), (b'dg-request-id', b'019d534c-8e8f-7581-9add-48f7f715fa3b'), (b'content-length', b'765'), (b'date', b'Fri, 03 Apr 2026 12:23:40 GMT')])
+23:23:40.258 INFO  httpx: HTTP Request: POST https://api.deepgram.com/v1/listen?language=en&model=nova-3&smart_format=true "HTTP/1.1 200 OK"
+23:23:40.259 DEBUG httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+23:23:40.260 DEBUG httpcore.http11: receive_response_body.complete
+23:23:40.260 DEBUG httpcore.http11: response_closed.started
+23:23:40.261 DEBUG httpcore.http11: response_closed.complete
+23:23:40.270 INFO  master: TRANSCRIPT: Hello.
+23:23:40.270 INFO  master: STT latency: 1.76s
+23:23:40.271 INFO  master: [stub_claude] simulating Claude load for transcript: 'Hello.'
+23:23:40.887 PERF  recorder_child: [DUTY/400] idle: mean=2.1ms p95=2.7ms max=3.1ms util=10%  arrival: mean=20.0ms σ=19.8ms  q_max=0
+23:23:42.887 PERF  recorder_child: [DUTY/500] idle: mean=1.2ms p95=1.2ms max=1.6ms util=6%  arrival: mean=20.0ms σ=19.9ms  q_max=0
+23:23:43.272 INFO  master: CLAUDE RESPONSE:
+[stub] received: 'Hello.'
+23:23:43.272 INFO  master: Claude latency: 3.00s
+23:23:43.272 INFO  master: total loop latency: 4.77s
+23:23:43.273 INFO  master: listening for wake word...
+23:23:43.273 DEBUG master: [master] state -> idle
+23:23:43.285 DEBUG recorder_state: [state] OWW full reset
+23:23:43.285 DEBUG master: [master] state -> wake_listen
+23:23:43.288 DEBUG recorder_child: [ring/write] phase idle→wake_listen: wrote 238 frames, write_pos=332160
+23:23:44.887 PERF  recorder_child: [DUTY/600] idle->wake_listen: mean=1.3ms p95=1.5ms max=1.6ms util=7%  arrival: mean=20.0ms σ=19.9ms  q_max=0
+23:23:45.029 PERF  recorder_child: [OWW/50] predict: n=25 mean=22.0ms p95=23.0ms max=23.3ms
+^C23:23:46.674 INFO  master: [master] Ctrl+C — shutting down
+23:23:46.674 INFO  recorder_child: [child] SIGINT — initiating safe shutdown...
+23:23:46.675 INFO  recorder_child: [child] shutdown commenced — draining pipeline...
+23:23:46.675 DEBUG recorder_state: [state] signaling callback paComplete...
+23:23:46.677 INFO  master: [master] child: shutdown commenced
+23:23:46.684 INFO  recorder_child: [child] SHUTDOWN command received
+23:23:46.776 DEBUG recorder_state: [state] stream stopped via paComplete
+2026-04-03 23:23:46.777 | DEBUG    | pipecat.pipeline.task:_cancel:673 - Cancelling pipeline task PipelineTask#0
+2026-04-03 23:23:46.777 | DEBUG    | pipecat.pipeline.task:_wait_for_pipeline_end:767 - PipelineTask#0: Closing. Waiting for CancelFrame#0(reason: None) to reach the end of the pipeline...
+23:23:46.779 DEBUG recorder_child: [child] callback already signaled before cancel
+2026-04-03 23:23:46.781 | DEBUG    | pipecat.pipeline.task:wait_for_cancel:758 - PipelineTask#0: CancelFrame#0(reason: None) reached the end of the pipeline.
+23:23:46.782 DEBUG recorder_child: [child] cleanup: skipped stream close (kernel will release)
+2026-04-03 23:23:46.783 | DEBUG    | pipecat.pipeline.task:run:621 - Pipeline task PipelineTask#0 is finishing...
+2026-04-03 23:23:46.783 | DEBUG    | pipecat.pipeline.task:run:626 - Pipeline task PipelineTask#0 has finished
+2026-04-03 23:23:46.784 | DEBUG    | pipecat.pipeline.runner:run:95 - Runner PipelineRunner#0 finished running PipelineTask#0
+23:23:46.784 INFO  recorder_child: [QDEPTH] max_depth_seen=0 total_alarms=0
+23:23:46.785 INFO  recorder_child:
+================================================================
+DUTY CYCLE SUMMARY
+================================================================
+
+  wake_listen  (283 frames, budget util 7%)
+    mean=1.4ms  p95=1.5ms  p99=1.6ms  max=23.1ms
+     0-5 ms:   282 ( 100%)  ██████████████████████████████
+     5-10ms:     0 (   0%)
+    10-15ms:     0 (   0%)
+    15-20ms:     0 (   0%)
+    >20 ms:     1 (   0%)  █
+
+  capture  (168 frames, budget util 12%)
+    mean=2.3ms  p95=5.4ms  p99=5.6ms  max=5.8ms
+     0-5 ms:   126 (  75%)  ██████████████████████████████
+     5-10ms:    42 (  25%)  ██████████
+    10-15ms:     0 (   0%)
+    15-20ms:     0 (   0%)
+    >20 ms:     0 (   0%)
+
+  idle  (238 frames, budget util 8%)
+    mean=1.6ms  p95=2.6ms  p99=2.8ms  max=3.1ms
+     0-5 ms:   238 ( 100%)  ██████████████████████████████
+     5-10ms:     0 (   0%)
+    10-15ms:     0 (   0%)
+    15-20ms:     0 (   0%)
+    >20 ms:     0 (   0%)
+
+  Frames over 20ms budget: 1/689 (0.1%)
+
+  Arrival cadence (inter-frame intervals):
+    wake_listen (282): mean=20.0ms σ=19.8ms min=0.1ms max=41.2ms
+    capture (168): mean=20.0ms σ=19.9ms min=0.1ms max=40.1ms
+    idle (238): mean=20.0ms σ=19.9ms min=0.1ms max=40.6ms
+
+  OWW predict: 70 calls in 283 wake frames (1 per 4.0 frames)
+    mean=22.4ms  p95=24.2ms  p99=24.4ms  max=24.5ms
+================================================================
+23:23:46.786 INFO  recorder_child: [child] SHUTDOWN_FINISHED sent
+23:23:46.787 INFO  master: [master] child: shutdown finished
+23:23:46.787 INFO  recorder_child: [child] exiting
+23:23:46.820 INFO  master: [master] done
+(venv) user@morpheus:~/raspberry-ai/mvp-modules/forked_assistant/src $

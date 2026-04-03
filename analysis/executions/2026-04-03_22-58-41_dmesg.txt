@@ -1,0 +1,32 @@
+[   16.988767] bcmgenet fd580000.ethernet: configuring instance for external RGMII (RX delay)
+[   16.991658] bcmgenet fd580000.ethernet eth0: Link is Down
+[   17.006321] brcmfmac: brcmf_cfg80211_set_power_mgmt: power save enabled
+[  394.031907] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[  394.032561] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[  394.032589] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[  394.032598] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[  394.885970] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[  394.886609] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[  394.886620] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[  394.886628] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[  394.893780] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[  394.894420] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[  394.894436] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[  394.894447] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[  397.557309] bcm2835-i2s fe203000.i2s: I2S SYNC error!
+[  397.557454] seeed-voicecard soc:sound: PREPARE stream=Capture irqs_disabled=0 in_atomic=0
+[  397.557465] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=1 irqs_disabled=0 in_atomic=0 sysclk_en=0
+[  397.558091] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=1 ret=0 sysclk_en=1
+[  397.558351] seeed-voicecard soc:sound: PREPARE stream=Capture irqs_disabled=0 in_atomic=0
+[  397.558363] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=1 irqs_disabled=0 in_atomic=0 sysclk_en=1
+[  397.558369] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=1 ret=0 sysclk_en=1
+[  397.558397] seeed-voicecard soc:sound: TRIG_START stream=Capture cmd=1 irqs_disabled=1 in_atomic=1
+[  434.261232] seeed-voicecard soc:sound: TRIG_STOP stream=Capture cmd=0 in_irq=0 irqs_disabled=1 in_atomic=1 path=workqueue
+[  434.261681] work_cb_codec_clk ENTER try_stop=0
+[  434.261700] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=0 irqs_disabled=0 in_atomic=0 sysclk_en=1
+[  434.262671] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=0 ret=0 sysclk_en=0
+[  434.262689] work_cb_codec_clk EXIT r=0 try_stop=0 rescheduling=0
+[  434.404989] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[  434.405680] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[  434.405701] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[  434.405724] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
