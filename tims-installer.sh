@@ -1,9 +1,12 @@
 #!/bin/bash
-# Tight rebuild loop for ac108-shutdown-fix development.
-# Bypasses DKMS and apt — use this for instrumentation/fix iteration.
+# Rebuild and install loop for ac108-shutdown-fix development.
+# Syncs from tsheahan, builds, installs to /lib/modules, then reboots.
 # Run from the repo root on the Pi: sudo ./tims-installer.sh
 #
-# For initial setup or persistence across reboots, use install.sh instead.
+# CONFIG_MODULE_FORCE_UNLOAD is not set on the Pi stock kernel, so hot-swap
+# is not possible. Install + reboot is the only reliable reload path.
+#
+# For initial setup (DKMS, dtoverlays, ALSA config), use install.sh instead.
 
 set -e
 
@@ -16,21 +19,14 @@ echo "==> Syncing from tsheahan/ac108-shutdown-fix..."
 # Run as the repo owner, not root, so git credentials and config are correct.
 sudo -u "$(stat -c '%U' "$(pwd)")" git pull tsheahan ac108-shutdown-fix
 
-echo "==> Stopping service and unloading modules..."
-systemctl stop seeed-voicecard 2>/dev/null || true
-# dtoverlay -r only removes dynamically-applied overlays; boot-time overlays
-# from config.txt cannot be removed at runtime, so the device binding persists
-# and modprobe -r returns EBUSY. Use rmmod -f to force past the refcount.
-rmmod -f snd_soc_seeed_voicecard 2>/dev/null || true
-rmmod -f snd_soc_ac108           2>/dev/null || true
-rmmod -f snd_soc_wm8960          2>/dev/null || true
-
 echo "==> Building..."
 make -C /lib/modules/$(uname -r)/build M=$(pwd) modules
 
-echo "==> Loading..."
-insmod ./snd-soc-ac108.ko
-insmod ./snd-soc-seeed-voicecard.ko
+echo "==> Installing to /lib/modules..."
+cp snd-soc-ac108.ko          /lib/modules/$(uname -r)/kernel/sound/soc/codecs/
+cp snd-soc-wm8960.ko         /lib/modules/$(uname -r)/kernel/sound/soc/codecs/
+cp snd-soc-seeed-voicecard.ko /lib/modules/$(uname -r)/kernel/sound/soc/bcm/
+depmod -a
 
-echo "==> Done. Modules loaded:"
-lsmod | grep snd_soc_
+echo "==> Done. Reboot to load new modules."
+echo "    Run: sudo reboot"
