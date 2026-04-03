@@ -24,6 +24,8 @@ Each execution is a set of files sharing a timestamp prefix (`YYYY-MM-DD_HH-MM-S
 | 2026-04-03_23-29-53 | V1 (sustained testing, cycle 4) | **Clean pass.** F1+F4 confirmed. 1 cycle: wake 0.801, "Hello?", STT 1.67s. Clean shutdown. | [`2026-04-03_23-29-53_report.md`](2026-04-03_23-29-53_report.md) |
 | 2026-04-03_23-32-13 | V1 (sustained testing, cycle 5) | **Partial** — dmesg capture truncated at TRIG_START (capture boundary artifact). F4 confirmed. F1/F2 unverifiable from dmesg. Python exit clean (`[master] done`). | [`2026-04-03_23-32-13_report.md`](2026-04-03_23-32-13_report.md) |
 | 2026-04-03_23-33-44 | V1 (sustained testing, cycle 6) | **Clean pass.** F1+F4 confirmed. 1 cycle: wake 0.993, "Hello?", STT 1.76s. Clean shutdown. No startup probes this run. | [`2026-04-03_23-33-44_report.md`](2026-04-03_23-33-44_report.md) |
+| 2026-04-04_00-13-17 | V3 (Python workarounds removed, run 1) | **Clean pass.** F1+F4 confirmed. 1 cycle: wake 0.988, "Hello?", STT 3.33s. `stream stopped` (not `via paComplete`) — V2 changes confirmed. Clean driver-only shutdown. | [`2026-04-04_00-13-17_report.md`](2026-04-04_00-13-17_report.md) |
+| 2026-04-04_00-14-36 | V3 (Python workarounds removed, run 2) | **Clean pass.** F1+F4 confirmed. 1 cycle: wake 0.854, "Hello?", STT 1.95s. V2 markers absent, driver-only shutdown clean. | [`2026-04-04_00-14-36_report.md`](2026-04-04_00-14-36_report.md) |
 
 ## Key findings from executions so far
 
@@ -39,7 +41,9 @@ Each execution is a set of files sharing a timestamp prefix (`YYYY-MM-DD_HH-MM-S
 
 These are all single-cycle runs (1 wake-capture-STT per invocation). V1 technically calls for 5+ cycles in a single sustained session. **V1 is substantively satisfied** — 6 clean cycle-equivalents across separate runs, same driver instance (no reboot between runs per kernel timestamps). A single long-session multi-cycle run would be ideal for formal V1 sign-off and to exercise F2/F3 cancel races.
 
-**Next:** Proceed to V2 (remove Python workarounds in raspberry-ai: `paComplete` flag, cancel monkey-patch, cleanup monkey-patch, `os._exit(0)`) then V3 (re-test).
+**V2 complete:** Python workarounds removed from raspberry-ai (`paComplete` flag, cancel monkey-patch, cleanup monkey-patch, `os._exit(0)`).
+
+**V3 status:** 2 clean runs (00-13-17, 00-14-36). Both passes: `stream stopped` (not `via paComplete`) confirms workarounds gone; F1+F4 confirmed; driver-only shutdown clean. **V3 passed.** Proceed to PR preparation (Phase 4).
 
 ## Parent context
 

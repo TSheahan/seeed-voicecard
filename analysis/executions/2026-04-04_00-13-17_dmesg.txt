@@ -1,0 +1,29 @@
+[ 4871.960154] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[ 4871.960828] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[ 4871.960885] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[ 4871.964943] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[ 4872.113966] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[ 4872.114603] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[ 4872.114614] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[ 4872.114622] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[ 4872.120135] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[ 4872.120782] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[ 4872.120792] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[ 4872.120800] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[ 4874.277223] bcm2835-i2s fe203000.i2s: I2S SYNC error!
+[ 4874.277335] seeed-voicecard soc:sound: PREPARE stream=Capture irqs_disabled=0 in_atomic=0
+[ 4874.277345] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=1 irqs_disabled=0 in_atomic=0 sysclk_en=0
+[ 4874.278279] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=1 ret=0 sysclk_en=1
+[ 4874.278487] seeed-voicecard soc:sound: PREPARE stream=Capture irqs_disabled=0 in_atomic=0
+[ 4874.278495] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=1 irqs_disabled=0 in_atomic=0 sysclk_en=1
+[ 4874.278501] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=1 ret=0 sysclk_en=1
+[ 4874.278523] seeed-voicecard soc:sound: TRIG_START stream=Capture cmd=1 irqs_disabled=1 in_atomic=1
+[ 4894.860698] seeed-voicecard soc:sound: TRIG_STOP stream=Capture cmd=0 in_irq=0 irqs_disabled=1 in_atomic=1 path=workqueue
+[ 4894.863900] work_cb_codec_clk ENTER try_stop=0
+[ 4894.863993] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=0 irqs_disabled=0 in_atomic=0 sysclk_en=1
+[ 4894.864994] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=0 ret=0 sysclk_en=0
+[ 4894.865001] work_cb_codec_clk EXIT r=0 try_stop=0 rescheduling=0
+[ 4894.967193] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[ 4894.967842] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[ 4894.967857] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[ 4894.967867] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
