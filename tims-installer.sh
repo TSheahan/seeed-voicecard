@@ -18,14 +18,12 @@ sudo -u "$(stat -c '%U' "$(pwd)")" git pull tsheahan ac108-shutdown-fix
 
 echo "==> Stopping service and unloading modules..."
 systemctl stop seeed-voicecard 2>/dev/null || true
-# Remove dtoverlays first — while they are active the modules are bound to
-# devices and modprobe -r will silently fail with EBUSY.
-dtoverlay -r seeed-2mic-voicecard 2>/dev/null || true
-dtoverlay -r seeed-4mic-voicecard 2>/dev/null || true
-dtoverlay -r seeed-8mic-voicecard 2>/dev/null || true
-modprobe -r snd_soc_seeed_voicecard 2>/dev/null || true
-modprobe -r snd_soc_ac108           2>/dev/null || true
-modprobe -r snd_soc_wm8960          2>/dev/null || true
+# dtoverlay -r only removes dynamically-applied overlays; boot-time overlays
+# from config.txt cannot be removed at runtime, so the device binding persists
+# and modprobe -r returns EBUSY. Use rmmod -f to force past the refcount.
+rmmod -f snd_soc_seeed_voicecard 2>/dev/null || true
+rmmod -f snd_soc_ac108           2>/dev/null || true
+rmmod -f snd_soc_wm8960          2>/dev/null || true
 
 echo "==> Building..."
 make -C /lib/modules/$(uname -r)/build M=$(pwd) modules
