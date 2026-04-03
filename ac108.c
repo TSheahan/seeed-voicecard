@@ -995,7 +995,9 @@ static int ac108_set_clock(int y_start_n_stop, struct snd_pcm_substream *substre
 	u8 reg;
 	int ret = 0;
 
-	dev_dbg(ac10x->codec->dev, "%s() L%d cmd:%d\n", __func__, __LINE__, y_start_n_stop);
+	dev_err(ac10x->codec->dev,
+		"ac108_set_clock ENTER y_start_n_stop=%d irqs_disabled=%d in_atomic=%d sysclk_en=%lu\n",
+		y_start_n_stop, irqs_disabled(), in_atomic(), ac10x->sysclk_en);
 
 	/* spin_lock move to machine trigger */
 
@@ -1033,6 +1035,10 @@ static int ac108_set_clock(int y_start_n_stop, struct snd_pcm_substream *substre
 			ac10x->sysclk_en = 0UL;
 		}
 	}
+
+	dev_err(ac10x->codec->dev,
+		"ac108_set_clock EXIT y_start_n_stop=%d ret=%d sysclk_en=%lu\n",
+		y_start_n_stop, ret, ac10x->sysclk_en);
 
 	return ret;
 }
@@ -1112,6 +1118,9 @@ void ac108_aif_shutdown(struct snd_pcm_substream *substream,
 	struct snd_soc_codec *codec = dai->codec;
 	struct ac10x_priv *ac10x = snd_soc_codec_get_drvdata(codec);
 
+	dev_err(codec->dev, "ac108_aif_shutdown ENTER stream=%s\n",
+		snd_pcm_stream_str(substream));
+
 	if (substream->stream == SNDRV_PCM_STREAM_CAPTURE) {
 		/*0x21: Module clock disable <I2S, ADC digital, MIC offset Calibration, ADC analog>*/
 		ac108_multi_write(MOD_CLK_EN, 0x0, ac10x);
@@ -1122,6 +1131,9 @@ void ac108_aif_shutdown(struct snd_pcm_substream *substream,
 	if (ac10x->i2c101) {
 		ac101_aif_shutdown(substream, dai);
 	}
+
+	dev_err(codec->dev, "ac108_aif_shutdown EXIT stream=%s\n",
+		snd_pcm_stream_str(substream));
 }
 
 int ac108_aif_mute(struct snd_soc_dai *dai, int mute, int direction) {

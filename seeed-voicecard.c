@@ -132,6 +132,9 @@ static void seeed_voice_card_shutdown(struct snd_pcm_substream *substream)
 	struct seeed_dai_props *dai_props =
 		seeed_priv_to_props(priv, rtd->num);
 
+	dev_err(rtd->card->dev, "seeed_voice_card_shutdown ENTER stream=%s\n",
+		snd_pcm_stream_str(substream));
+
 	snd_soc_rtd_to_cpu(rtd, 0)->driver->playback.channels_min = priv->channels_playback_default;
 	snd_soc_rtd_to_cpu(rtd, 0)->driver->playback.channels_max = priv->channels_playback_default;
 	snd_soc_rtd_to_cpu(rtd, 0)->driver->capture.channels_min = priv->channels_capture_default;
@@ -140,6 +143,9 @@ static void seeed_voice_card_shutdown(struct snd_pcm_substream *substream)
 	clk_disable_unprepare(dai_props->cpu_dai.clk);
 
 	clk_disable_unprepare(dai_props->codec_dai.clk);
+
+	dev_err(rtd->card->dev, "seeed_voice_card_shutdown EXIT stream=%s\n",
+		snd_pcm_stream_str(substream));
 }
 
 static int seeed_voice_card_hw_params(struct snd_pcm_substream *substream,
@@ -195,12 +201,17 @@ static void work_cb_codec_clk(struct work_struct *work)
 	struct seeed_card_data *priv = container_of(work, struct seeed_card_data, work_codec_clk);
 	int r = 0;
 
+	pr_err("work_cb_codec_clk ENTER try_stop=%d\n", priv->try_stop);
+
 	if (_set_clock[SNDRV_PCM_STREAM_CAPTURE]) {
 		r = r || _set_clock[SNDRV_PCM_STREAM_CAPTURE](0, NULL, 0, NULL); /* not using 2nd to 4th arg if 1st == 0 */
 	}
 	if (_set_clock[SNDRV_PCM_STREAM_PLAYBACK]) {
 		r = r || _set_clock[SNDRV_PCM_STREAM_PLAYBACK](0, NULL, 0, NULL); /* not using 2nd to 4th arg if 1st == 0 */
 	}
+
+	pr_err("work_cb_codec_clk EXIT r=%d try_stop=%d rescheduling=%d\n",
+		r, priv->try_stop, (r && priv->try_stop < TRY_STOP_MAX));
 
 	if (r && priv->try_stop++ < TRY_STOP_MAX) {
 		if (0 != schedule_work(&priv->work_codec_clk)) {}
@@ -226,6 +237,10 @@ static int seeed_voice_card_trigger(struct snd_pcm_substream *substream, int cmd
 	case SNDRV_PCM_TRIGGER_START:
 	case SNDRV_PCM_TRIGGER_RESUME:
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
+		dev_err(rtd->card->dev,
+			"TRIG_START stream=%s cmd=%d irqs_disabled=%d in_atomic=%d\n",
+			snd_pcm_stream_str(substream), cmd,
+			irqs_disabled(), in_atomic());
 		if (cancel_work_sync(&priv->work_codec_clk) != 0) {}
 		#if CONFIG_AC10X_TRIG_LOCK
 		/* I know it will degrades performance, but I have no choice */
@@ -245,6 +260,12 @@ static int seeed_voice_card_trigger(struct snd_pcm_substream *substream, int cmd
 		if (dai->stream[SNDRV_PCM_STREAM_CAPTURE].active && substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
 			break;
 		}
+
+		dev_err(rtd->card->dev,
+			"TRIG_STOP stream=%s cmd=%d in_irq=%d irqs_disabled=%d in_atomic=%d path=%s\n",
+			snd_pcm_stream_str(substream), cmd,
+			!!in_irq(), irqs_disabled(), in_atomic(),
+			(in_irq() || in_nmi() || in_serving_softirq()) ? "workqueue" : "synchronous");
 
 		/* interrupt environment */
 		if (in_irq() || in_nmi() || in_serving_softirq()) {
