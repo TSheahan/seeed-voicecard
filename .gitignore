@@ -1,1 +1,18 @@
 .idea/
+
+# Kernel module build artifacts
+*.o
+*.ko
+*.mod
+*.mod.c
+*.mod.o
+*.o.cmd
+*.o.d
+*.ko.cmd
+*.mod.cmd
+*.mod.o.cmd
+.module-common.o
+Module.symvers
+modules.order
+.Module.symvers.cmd
+.modules.order.cmd
