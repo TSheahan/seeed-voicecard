@@ -1,0 +1,160 @@
+[  295.835532] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[  295.836179] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[  295.836196] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[  295.836202] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[  296.689234] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[  296.689874] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[  296.689887] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[  296.689894] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[  296.697435] ac10x-codec 1-003b: ac108_aif_shutdown ENTER stream=Capture
+[  296.698070] ac10x-codec 1-003b: ac108_aif_shutdown EXIT stream=Capture
+[  296.698083] seeed-voicecard soc:sound: seeed_voice_card_shutdown ENTER stream=Capture
+[  296.698090] seeed-voicecard soc:sound: seeed_voice_card_shutdown EXIT stream=Capture
+[  299.351500] bcm2835-i2s fe203000.i2s: I2S SYNC error!
+[  299.351979] seeed-voicecard soc:sound: TRIG_START stream=Capture cmd=1 irqs_disabled=1 in_atomic=1
+[  299.351999] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=1 irqs_disabled=1 in_atomic=1 sysclk_en=0
+[  299.352017] BUG: scheduling while atomic: python/1280/0x00000002
+[  299.352030] Modules linked in: spidev rfcomm spi_bcm2835 cmac algif_hash i2c_dev aes_arm64 aes_generic algif_skcipher af_alg bnep binfmt_misc v3d brcmfmac_wcc brcmfmac brcmutil hci_uart gpu_sched btbcm cfg80211 drm_shmem_helper raspberrypi_hwmon bluetooth rpi_hevc_dec bcm2835_v4l2(C) bcm2835_codec(C) bcm2835_isp(C) bcm2835_mmal_vchiq(C) ecdh_generic vc_sm_cma(C) i2c_bcm2835 v4l2_mem2mem ecc videobuf2_dma_contig videobuf2_vmalloc vc4 videobuf2_memops rfkill videobuf2_v4l2 libaes videodev snd_soc_hdmi_codec snd_soc_bcm2835_i2s videobuf2_common drm_display_helper raspberrypi_gpiomem cec mc snd_bcm2835(C) drm_dma_helper drm_kms_helper nvmem_rmem sch_fq_codel snd_soc_wm8960(O) snd_soc_ac108(O) regmap_i2c snd_soc_seeed_voicecard(O) snd_soc_simple_card_utils snd_soc_core snd_compress snd_pcm_dmaengine snd_pcm snd_timer snd zram lz4_compress drm fuse drm_panel_orientation_quirks backlight nfnetlink ip_tables x_tables ipv6 i2c_brcmstb uio_pdrv_genirq uio
+[  299.352320] CPU: 0 UID: 1000 PID: 1280 Comm: python Tainted: G         C O       6.12.75+rpt-rpi-v8 #1  Debian 1:6.12.75-1+rpt1
+[  299.352332] Tainted: [C]=CRAP, [O]=OOT_MODULE
+[  299.352335] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+[  299.352339] Call trace:
+[  299.352342]  dump_backtrace.part.0+0xe0/0x100
+[  299.352364]  show_stack+0x20/0x40
+[  299.352370]  dump_stack_lvl+0x60/0x80
+[  299.352378]  dump_stack+0x18/0x28
+[  299.352384]  __schedule_bug+0x5c/0x80
+[  299.352394]  __schedule+0x910/0xb68
+[  299.352404]  schedule+0x3c/0x148
+[  299.352412]  schedule_timeout+0x9c/0x1a8
+[  299.352418]  wait_for_completion_timeout+0x80/0x160
+[  299.352427]  bcm2835_i2c_xfer+0x318/0x3f0 [i2c_bcm2835]
+[  299.352441]  __i2c_transfer+0x1cc/0x6a0
+[  299.352449]  i2c_transfer+0x78/0x100
+[  299.352454]  i2c_transfer_buffer_flags+0x6c/0xb8
+[  299.352459]  regmap_i2c_write+0x28/0x70 [regmap_i2c]
+[  299.352469]  _regmap_raw_write_impl+0x588/0x7e0
+[  299.352481]  _regmap_bus_raw_write+0x68/0x98
+[  299.352490]  _regmap_write+0x60/0x180
+[  299.352498]  _regmap_update_bits+0x124/0x150
+[  299.352507]  regmap_update_bits_base+0x6c/0xa8
+[  299.352512]  ac108_set_clock+0x23c/0x2f0 [snd_soc_ac108]
+[  299.352530]  seeed_voice_card_trigger+0x140/0x298 [snd_soc_seeed_voicecard]
+[  299.352538]  soc_link_trigger+0x38/0xa8 [snd_soc_core]
+[  299.352626]  snd_soc_link_trigger+0x54/0xe0 [snd_soc_core]
+[  299.352695]  soc_pcm_trigger+0xe4/0x1f8 [snd_soc_core]
+[  299.352761]  snd_pcm_do_start+0x4c/0x80 [snd_pcm]
+[  299.352803]  snd_pcm_action_single+0x50/0xc0 [snd_pcm]
+[  299.352839]  snd_pcm_action+0x88/0xb0 [snd_pcm]
+[  299.352874]  snd_pcm_action_lock_irq+0x4c/0xb8 [snd_pcm]
+[  299.352909]  snd_pcm_common_ioctl+0xcd4/0x16c0 [snd_pcm]
+[  299.352945]  snd_pcm_ioctl+0x3c/0x60 [snd_pcm]
+[  299.352980]  __arm64_sys_ioctl+0xb4/0x100
+[  299.352989]  invoke_syscall+0x50/0x120
+[  299.352999]  el0_svc_common.constprop.0+0x48/0xf0
+[  299.353008]  do_el0_svc+0x24/0x38
+[  299.353016]  el0_svc+0x30/0xf8
+[  299.353023]  el0t_64_sync_handler+0x120/0x130
+[  299.353030]  el0t_64_sync+0x190/0x198
+[  299.353464] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=1 ret=0 sysclk_en=1
+[  299.353561] BUG: scheduling while atomic: python/1280/0x00000000
+[  299.353571] Modules linked in: spidev rfcomm spi_bcm2835 cmac algif_hash i2c_dev aes_arm64 aes_generic algif_skcipher af_alg bnep binfmt_misc v3d brcmfmac_wcc brcmfmac brcmutil hci_uart gpu_sched btbcm cfg80211 drm_shmem_helper raspberrypi_hwmon bluetooth rpi_hevc_dec bcm2835_v4l2(C) bcm2835_codec(C) bcm2835_isp(C) bcm2835_mmal_vchiq(C) ecdh_generic vc_sm_cma(C) i2c_bcm2835 v4l2_mem2mem ecc videobuf2_dma_contig videobuf2_vmalloc vc4 videobuf2_memops rfkill videobuf2_v4l2 libaes videodev snd_soc_hdmi_codec snd_soc_bcm2835_i2s videobuf2_common drm_display_helper raspberrypi_gpiomem cec mc snd_bcm2835(C) drm_dma_helper drm_kms_helper nvmem_rmem sch_fq_codel snd_soc_wm8960(O) snd_soc_ac108(O) regmap_i2c snd_soc_seeed_voicecard(O) snd_soc_simple_card_utils snd_soc_core snd_compress snd_pcm_dmaengine snd_pcm snd_timer snd zram lz4_compress drm fuse drm_panel_orientation_quirks backlight nfnetlink ip_tables x_tables ipv6 i2c_brcmstb uio_pdrv_genirq uio
+[  299.353882] CPU: 0 UID: 1000 PID: 1280 Comm: python Tainted: G        WC O       6.12.75+rpt-rpi-v8 #1  Debian 1:6.12.75-1+rpt1
+[  299.353893] Tainted: [W]=WARN, [C]=CRAP, [O]=OOT_MODULE
+[  299.353896] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+[  299.353899] Call trace:
+[  299.353902]  dump_backtrace.part.0+0xe0/0x100
+[  299.353921]  show_stack+0x20/0x40
+[  299.353926]  dump_stack_lvl+0x60/0x80
+[  299.353934]  dump_stack+0x18/0x28
+[  299.353939]  __schedule_bug+0x5c/0x80
+[  299.353949]  __schedule+0x910/0xb68
+[  299.353959]  schedule+0x3c/0x148
+[  299.353967]  schedule_hrtimeout_range_clock+0xfc/0x1a0
+[  299.353973]  schedule_hrtimeout_range+0x1c/0x30
+[  299.353979]  do_sys_poll+0x3b8/0x540
+[  299.353986]  __arm64_sys_ppoll+0xb4/0x148
+[  299.353993]  invoke_syscall+0x50/0x120
+[  299.354002]  el0_svc_common.constprop.0+0x48/0xf0
+[  299.354011]  do_el0_svc+0x24/0x38
+[  299.354019]  el0_svc+0x30/0xf8
+[  299.354025]  el0t_64_sync_handler+0x120/0x130
+[  299.354032]  el0t_64_sync+0x190/0x198
+[  336.217075] seeed-voicecard soc:sound: TRIG_STOP stream=Capture cmd=0 in_irq=0 irqs_disabled=1 in_atomic=1 path=synchronous
+[  336.217101] ac10x-codec 1-003b: ac108_set_clock ENTER y_start_n_stop=0 irqs_disabled=1 in_atomic=1 sysclk_en=1
+[  336.217123] BUG: scheduling while atomic: python/1280/0x00000002
+[  336.217129] Modules linked in: spidev rfcomm spi_bcm2835 cmac algif_hash i2c_dev aes_arm64 aes_generic algif_skcipher af_alg bnep binfmt_misc v3d brcmfmac_wcc brcmfmac brcmutil hci_uart gpu_sched btbcm cfg80211 drm_shmem_helper raspberrypi_hwmon bluetooth rpi_hevc_dec bcm2835_v4l2(C) bcm2835_codec(C) bcm2835_isp(C) bcm2835_mmal_vchiq(C) ecdh_generic vc_sm_cma(C) i2c_bcm2835 v4l2_mem2mem ecc videobuf2_dma_contig videobuf2_vmalloc vc4 videobuf2_memops rfkill videobuf2_v4l2 libaes videodev snd_soc_hdmi_codec snd_soc_bcm2835_i2s videobuf2_common drm_display_helper raspberrypi_gpiomem cec mc snd_bcm2835(C) drm_dma_helper drm_kms_helper nvmem_rmem sch_fq_codel snd_soc_wm8960(O) snd_soc_ac108(O) regmap_i2c snd_soc_seeed_voicecard(O) snd_soc_simple_card_utils snd_soc_core snd_compress snd_pcm_dmaengine snd_pcm snd_timer snd zram lz4_compress drm fuse drm_panel_orientation_quirks backlight nfnetlink ip_tables x_tables ipv6 i2c_brcmstb uio_pdrv_genirq uio
+[  336.217331] CPU: 0 UID: 1000 PID: 1280 Comm: python Tainted: G        WC O       6.12.75+rpt-rpi-v8 #1  Debian 1:6.12.75-1+rpt1
+[  336.217341] Tainted: [W]=WARN, [C]=CRAP, [O]=OOT_MODULE
+[  336.217343] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+[  336.217346] Call trace:
+[  336.217349]  dump_backtrace.part.0+0xe0/0x100
+[  336.217370]  show_stack+0x20/0x40
+[  336.217374]  dump_stack_lvl+0x60/0x80
+[  336.217380]  dump_stack+0x18/0x28
+[  336.217384]  __schedule_bug+0x5c/0x80
+[  336.217392]  __schedule+0x910/0xb68
+[  336.217400]  schedule+0x3c/0x148
+[  336.217405]  schedule_timeout+0x9c/0x1a8
+[  336.217409]  wait_for_completion_timeout+0x80/0x160
+[  336.217416]  bcm2835_i2c_xfer+0x318/0x3f0 [i2c_bcm2835]
+[  336.217428]  __i2c_transfer+0x1cc/0x6a0
+[  336.217434]  i2c_transfer+0x78/0x100
+[  336.217437]  i2c_transfer_buffer_flags+0x6c/0xb8
+[  336.217441]  regmap_i2c_write+0x28/0x70 [regmap_i2c]
+[  336.217449]  _regmap_raw_write_impl+0x588/0x7e0
+[  336.217458]  _regmap_bus_raw_write+0x68/0x98
+[  336.217464]  _regmap_write+0x60/0x180
+[  336.217470]  _regmap_update_bits+0x124/0x150
+[  336.217476]  regmap_update_bits_base+0x6c/0xa8
+[  336.217479]  ac108_multi_update_bits+0x7c/0x108 [snd_soc_ac108]
+[  336.217493]  ac108_set_clock+0x124/0x2f0 [snd_soc_ac108]
+[  336.217500]  seeed_voice_card_trigger+0x264/0x298 [snd_soc_seeed_voicecard]
+[  336.217506]  soc_link_trigger+0x38/0xa8 [snd_soc_core]
+[  336.217581]  snd_soc_link_trigger+0x94/0xe0 [snd_soc_core]
+[  336.217627]  soc_pcm_trigger+0x13c/0x1f8 [snd_soc_core]
+[  336.217671]  snd_pcm_do_stop+0x70/0xa0 [snd_pcm]
+[  336.217704]  snd_pcm_action_single+0x50/0xc0 [snd_pcm]
+[  336.217729]  snd_pcm_action+0x88/0xb0 [snd_pcm]
+[  336.217752]  snd_pcm_drop+0x6c/0x108 [snd_pcm]
+[  336.217775]  snd_pcm_common_ioctl+0x324/0x16c0 [snd_pcm]
+[  336.217799]  snd_pcm_ioctl+0x3c/0x60 [snd_pcm]
+[  336.217823]  __arm64_sys_ioctl+0xb4/0x100
+[  336.217830]  invoke_syscall+0x50/0x120
+[  336.217837]  el0_svc_common.constprop.0+0x48/0xf0
+[  336.217843]  do_el0_svc+0x24/0x38
+[  336.217848]  el0_svc+0x30/0xf8
+[  336.217853]  el0t_64_sync_handler+0x120/0x130
+[  336.217857]  el0t_64_sync+0x190/0x198
+[  336.218513] ac10x-codec 1-003b: ac108_set_clock EXIT y_start_n_stop=0 ret=0 sysclk_en=0
+[  336.218574] Unable to handle kernel paging request at virtual address 0000007f948876e8
+[  336.218578] Mem abort info:
+[  336.218579]   ESR = 0x000000008200000b
+[  336.218582]   EC = 0x20: IABT (lower EL), IL = 32 bits
+[  336.218585]   SET = 0, FnV = 0
+[  336.218587]   EA = 0, S1PTW = 0
+[  336.218588]   FSC = 0x0b: level 3 access flag fault
+[  336.218591] user pgtable: 4k pages, 39-bit VAs, pgdp=00000000317a1000
+[  336.218594] [0000007f948876e8] pgd=0800000031c42003, p4d=0800000031c42003, pud=0800000031c42003, pmd=0800000031c73003, pte=002000000b127bc3
+[  336.218607] Internal error: Oops: 000000008200000b [#1] PREEMPT SMP
+[  336.275245] Modules linked in: spidev rfcomm spi_bcm2835 cmac algif_hash i2c_dev aes_arm64 aes_generic algif_skcipher af_alg bnep binfmt_misc v3d brcmfmac_wcc brcmfmac brcmutil hci_uart gpu_sched btbcm cfg80211 drm_shmem_helper raspberrypi_hwmon bluetooth rpi_hevc_dec bcm2835_v4l2(C) bcm2835_codec(C) bcm2835_isp(C) bcm2835_mmal_vchiq(C) ecdh_generic vc_sm_cma(C) i2c_bcm2835 v4l2_mem2mem ecc videobuf2_dma_contig videobuf2_vmalloc vc4 videobuf2_memops rfkill videobuf2_v4l2 libaes videodev snd_soc_hdmi_codec snd_soc_bcm2835_i2s videobuf2_common drm_display_helper raspberrypi_gpiomem cec mc snd_bcm2835(C) drm_dma_helper drm_kms_helper nvmem_rmem sch_fq_codel snd_soc_wm8960(O) snd_soc_ac108(O) regmap_i2c snd_soc_seeed_voicecard(O) snd_soc_simple_card_utils snd_soc_core snd_compress snd_pcm_dmaengine snd_pcm snd_timer snd zram lz4_compress drm fuse drm_panel_orientation_quirks backlight nfnetlink ip_tables x_tables ipv6 i2c_brcmstb uio_pdrv_genirq uio
+[  336.360417] CPU: 0 UID: 1000 PID: 1280 Comm: python Tainted: G        WC O       6.12.75+rpt-rpi-v8 #1  Debian 1:6.12.75-1+rpt1
+[  336.372066] Tainted: [W]=WARN, [C]=CRAP, [O]=OOT_MODULE
+[  336.377363] Hardware name: Raspberry Pi 4 Model B Rev 1.1 (DT)
+[  336.383276] pstate: 60000000 (nZCv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+[  336.390338] pc : 0000007f948876e8
+[  336.393695] lr : 0000007f96d0f604
+[  336.397051] sp : 0000007f8910e700
+[  336.400407] x29: 0000007f8910e700 x28: 0000000000000140 x27: 000000002e361cc8
+[  336.407651] x26: 0000007f8910e75c x25: 0000007f8910e770 x24: 000000002e361e10
+[  336.414894] x23: 0000007f8910e75c x22: 0000007f8910e760 x21: 0000007f864d09f0
+[  336.422137] x20: 0000007f8910f160 x19: 0000000000000000 x18: 000000002e779f40
+[  336.429379] x17: 0000000000000011 x16: 0000007f948876e8 x15: 0000000000000000
+[  336.436622] x14: 0000000000000000 x13: 0000007f863ce78c x12: 000000043a81f99a
+[  336.443865] x11: 00ffffffffffffff x10: 002ddd6a1787cbee x9 : 0000000000000018
+[  336.451107] x8 : 000000000000001d x7 : 000000001284c237 x6 : 000000000000b456
+[  336.458349] x5 : 0000007f8910f160 x4 : be3dcd25679ae933 x3 : 0000007f948876e8
+[  336.465591] x2 : 0000007f8910e8e0 x1 : 0000007f96d0f480 x0 : 0000007f8910f5d0
+[  336.472836] ---[ end trace 0000000000000000 ]---
+[  336.482452] pstore: backend (ramoops) writing error (-28)
+[  336.488001] Kernel panic - not syncing: Aiee, killing interrupt handler!
