@@ -21,14 +21,15 @@ Read [`ac108_shutdown_crash_analysis.md`](ac108_shutdown_crash_analysis.md) befo
 
 | ID | Description | Phase | Status | Depends on |
 |---|---|---|---|---|
-| I1 | Add `dev_err` to `seeed_voice_card_trigger` TRIGGER_START / TRIGGER_STOP with timestamps | 1 | pending | — |
-| I2 | Add `dev_err` to `ac108_aif_shutdown` entry/exit | 1 | pending | — |
-| I3 | Add `dev_err` to `ac108_set_clock` entry/exit with `y_start_n_stop` value | 1 | pending | — |
-| I4 | Add `dev_err` to `work_cb_codec_clk` entry/exit | 1 | pending | — |
+| I1 | Add `dev_err` to `seeed_voice_card_trigger` TRIGGER_START / TRIGGER_STOP with context (irqs_disabled, in_atomic, path) | 1 | done | — |
+| I2 | Add `dev_err` to `ac108_aif_shutdown` entry/exit | 1 | done | — |
+| I3 | Add `dev_err` to `ac108_set_clock` entry/exit with `y_start_n_stop`, irqs_disabled, in_atomic, sysclk_en | 1 | done | — |
+| I4 | Add `pr_err` to `work_cb_codec_clk` entry/exit with try_stop, rescheduling | 1 | done | — |
+| I+ | Add `dev_err` to `seeed_voice_card_shutdown` entry/exit | 1 | done | — |
 | I5 | Rebuild module, load on Pi, reproduce crash, capture dmesg via serial console or pstore | 1 | pending | I1–I4 |
 | U1 | Resolve: does PortAudio drain after paComplete? (count TRIGGER_STOP events in dmesg) | 1 | pending | I5 |
 | U2 | Resolve: does sleeping-in-atomic cause reboot directly or via cascading corruption? | 1 | pending | I5 |
-| U3 | Resolve: does AC101 contribute I2C writes on the teardown path? (read `ac101.c`) | 1 | pending | — |
+| U3 | Resolve: does AC101 contribute I2C writes on the teardown path? (read `ac101.c`) | 1 | resolved | — |
 | U5 | Resolve: I2C IRQ affinity on Pi 4 (`cat /proc/irq/*/smp_affinity_list`) | 1 | pending | — |
 | F1 | Fix 1: unconditional workqueue deferral in TRIGGER_STOP | 2 | pending | I5 |
 | F2 | Fix 2: `cancel_work_sync` in `seeed_voice_card_shutdown` | 2 | pending | F1 |
@@ -45,7 +46,12 @@ Read [`ac108_shutdown_crash_analysis.md`](ac108_shutdown_crash_analysis.md) befo
 | PR2 | Write PR description from analysis document | 4 | pending | PR1 |
 | PR3 | Submit PR to `HinTak/seeed-voicecard` | 4 | pending | PR2 |
 
-**Next item to pick up:** I1 (instrument `seeed_voice_card_trigger`). This is the foundation — all subsequent work depends on dmesg evidence from instrumented runs.
+**Next item to pick up:** I5 (rebuild module, deploy to Pi, reproduce crash, capture dmesg). All instrumentation is in place.
+
+### Resolved uncertainties
+
+#### U3 — AC101 role in teardown path
+`ac101_trigger()` has an **empty case** for TRIGGER_STOP/SUSPEND/PAUSE_PUSH (`ac101.c:1285–1288`) — it performs zero I2C writes on the stop path. `ac101_aif_shutdown()` (`ac101.c:951–967`) does perform 3–4 I2C writes via `ac101_aif1clk(POST_PMD)`, but this runs from the ALSA `.shutdown` callback (process context, not atomic), so it is safe. On the ReSpeaker 4-Mic Array HAT, `i2c101` is expected non-NULL (`ac108.c:1435–1436` sets it when AC101 probes successfully; `ac10x.h:27` sets `_MASTER_MULTI_CODEC == _MASTER_AC101`). **Net impact on the fix plan:** AC101 does not contribute sleeping-in-atomic bugs on the teardown path. F6 remains focused on the `ac108_trigger` TRIGGER_START I2C-under-spinlock issue. However, note that `ac101_trigger(START)` (`ac101.c:1271–1282`) also performs I2C writes (`ac101_update_bits`) under spinlock — this is an additional sleeping-in-atomic bug on the START path that should be addressed alongside F6.
 
 ## PR preparation
 
