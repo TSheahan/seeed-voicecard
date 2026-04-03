@@ -22,10 +22,16 @@ sudo -u "$(stat -c '%U' "$(pwd)")" git pull tsheahan ac108-shutdown-fix
 echo "==> Building..."
 make -C /lib/modules/$(uname -r)/build M=$(pwd) modules
 
-echo "==> Installing to /lib/modules..."
-cp snd-soc-ac108.ko          /lib/modules/$(uname -r)/kernel/sound/soc/codecs/
-cp snd-soc-wm8960.ko         /lib/modules/$(uname -r)/kernel/sound/soc/codecs/
-cp snd-soc-seeed-voicecard.ko /lib/modules/$(uname -r)/kernel/sound/soc/bcm/
+echo "==> Installing to /lib/modules (DKMS path)..."
+# DKMS modules in updates/dkms/ take precedence over kernel/ in module search
+# order. Compress with xz to match the format DKMS uses.
+DKMS_PATH=/lib/modules/$(uname -r)/updates/dkms
+xz -kf snd-soc-ac108.ko
+xz -kf snd-soc-seeed-voicecard.ko
+xz -kf snd-soc-wm8960.ko
+cp snd-soc-ac108.ko.xz           $DKMS_PATH/
+cp snd-soc-seeed-voicecard.ko.xz $DKMS_PATH/
+cp snd-soc-wm8960.ko.xz          $DKMS_PATH/
 depmod -a
 
 echo "==> Done. Reboot to load new modules."
