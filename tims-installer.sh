@@ -12,10 +12,11 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-echo "==> Unloading modules..."
-rmmod snd_soc_seeed_voicecard 2>/dev/null || true
-rmmod snd_soc_ac108           2>/dev/null || true
-rmmod snd_soc_wm8960          2>/dev/null || true
+echo "==> Stopping service and unloading modules..."
+systemctl stop seeed-voicecard 2>/dev/null || true
+modprobe -r snd_soc_seeed_voicecard 2>/dev/null || true
+modprobe -r snd_soc_ac108           2>/dev/null || true
+modprobe -r snd_soc_wm8960          2>/dev/null || true
 
 echo "==> Building..."
 make -C /lib/modules/$(uname -r)/build M=$(pwd) modules

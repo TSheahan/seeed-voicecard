@@ -996,7 +996,7 @@ static int ac108_set_clock(int y_start_n_stop, struct snd_pcm_substream *substre
 	int ret = 0;
 
 	dev_err(ac10x->codec->dev,
-		"ac108_set_clock ENTER y_start_n_stop=%d irqs_disabled=%d in_atomic=%d sysclk_en=%lu\n",
+		"ac108_set_clock ENTER y_start_n_stop=%d irqs_disabled=%d in_atomic=%d sysclk_en=%d\n",
 		y_start_n_stop, irqs_disabled(), in_atomic(), ac10x->sysclk_en);
 
 	/* spin_lock move to machine trigger */
@@ -1037,7 +1037,7 @@ static int ac108_set_clock(int y_start_n_stop, struct snd_pcm_substream *substre
 	}
 
 	dev_err(ac10x->codec->dev,
-		"ac108_set_clock EXIT y_start_n_stop=%d ret=%d sysclk_en=%lu\n",
+		"ac108_set_clock EXIT y_start_n_stop=%d ret=%d sysclk_en=%d\n",
 		y_start_n_stop, ret, ac10x->sysclk_en);
 
 	return ret;
