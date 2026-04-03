@@ -34,5 +34,19 @@ cp snd-soc-seeed-voicecard.ko.xz $DKMS_PATH/
 cp snd-soc-wm8960.ko.xz          $DKMS_PATH/
 depmod -a
 
-echo "==> Done. Reboot to load new modules."
-echo "    Run: sudo reboot"
+echo "==> Verifying installed modules match build tree..."
+for mod in snd_soc_ac108 snd_soc_seeed_voicecard; do
+  ko=$(echo $mod | tr '_' '-').ko
+  installed=$(modinfo $mod          2>/dev/null | awk '/^srcversion/{print $2}')
+  built=$(    modinfo ./$ko         2>/dev/null | awk '/^srcversion/{print $2}')
+  if [[ "$installed" == "$built" ]]; then
+    echo "  OK  $mod ($installed)"
+  else
+    echo "  MISMATCH $mod"
+    echo "    installed: $installed"
+    echo "    built:     $built"
+  fi
+done
+
+echo ""
+echo "==> Done. Reboot to load new modules: sudo reboot"
