@@ -12,6 +12,10 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+echo "==> Syncing from tsheahan/ac108-shutdown-fix..."
+# Run as the repo owner, not root, so git credentials and config are correct.
+sudo -u "$(stat -c '%U' "$(pwd)")" git pull tsheahan ac108-shutdown-fix
+
 echo "==> Stopping service and unloading modules..."
 systemctl stop seeed-voicecard 2>/dev/null || true
 modprobe -r snd_soc_seeed_voicecard 2>/dev/null || true
