@@ -15,7 +15,7 @@ Read [`ac108_shutdown_crash_analysis.md`](ac108_shutdown_crash_analysis.md) befo
 | 1 | Instrumentation | **done** | Hypothesis confirmed with runtime evidence. See `analysis/executions/2026-04-03_22-18-50_dmesg.txt`. |
 | 2 | Fix | **done** | F1–F4 written and validated. Single-cycle test clean: zero BUG, no Oops, no panic. See [`analysis/executions/2026-04-03_22-58-41_report.md`](executions/2026-04-03_22-58-41_report.md). F5 (error handling) deferred. F6 (ac101 spinlock) confirmed moot after F4. |
 | 3 | Validate | **done** | V1: 6 clean cycles (zero BUG). V2: Python workarounds removed. V3: 2 clean runs with workarounds gone. |
-| 4 | PR | pending | Produce a clean branch from `upstream/v6.12` with fix commits only (no `analysis/`, no instrumentation). Write PR description drawing from the analysis document. Submit to `HinTak/seeed-voicecard`. |
+| 4 | PR | **done** | Submitted to `HinTak/seeed-voicecard` targeting `v6.12`. Two commits: F1–F4 fix + F5 hardening. References issue #22. |
 
 ## Work items
 
@@ -41,11 +41,11 @@ Read [`ac108_shutdown_crash_analysis.md`](ac108_shutdown_crash_analysis.md) befo
 | V1 | Sustained Pi testing: 5+ wake-capture-STT-shutdown cycles without crash | 3 | done | F1-F4-test |
 | V2 | Remove Python workarounds in raspberry-ai (paComplete flag, monkey-patches, `os._exit`) | 3 | done | V1 |
 | V3 | Re-test after Python workaround removal | 3 | done | V2 |
-| PR1 | Create clean branch from `upstream/v6.12`, cherry-pick fix commits only | 4 | pending | V1 |
-| PR2 | Write PR description from analysis document | 4 | pending | PR1 |
-| PR3 | Submit PR to `HinTak/seeed-voicecard` | 4 | pending | PR2 |
+| PR1 | Create clean branch from `upstream/v6.12`, cherry-pick fix commits only | 4 | done | V1 |
+| PR2 | Write PR description from analysis document | 4 | done | PR1 |
+| PR3 | Submit PR to `HinTak/seeed-voicecard` | 4 | done | PR2 |
 
-**Next item to pick up:** F5 (error handling in `ac108_multi_write`), then PR preparation (Phase 4). V1–V3 all passed. See [`analysis/executions/AGENTS.md`](executions/AGENTS.md) for full execution history.
+**All phases complete.** PR submitted to `HinTak/seeed-voicecard` targeting `v6.12`. Awaiting maintainer review. See [`analysis/pr_description.md`](pr_description.md) for the PR text.
 
 ### Summary of F1–F4 changes (all in `seeed-voicecard.c`)
 
